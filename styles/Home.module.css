@@ -1,11 +1,18 @@
+
+
 .title a {
-  color: #0070f3;
   text-decoration: none;
 }
 
 .songList{
-  font-size: 8px;
-  color: #0070f3;
+  font-size: .8rem;
+  color: #aaa;
+}
+
+.songListActive{
+  font-size: 1.5rem;
+  line-height: 1rem;
+  color: #333;
 }
 
 .title a:hover,
