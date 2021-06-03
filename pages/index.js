@@ -32,7 +32,8 @@ export default function Home() {
               .map((f) => ({
                   all: f,
                   url: baseUrl + f.name,
-                  title: f.title ? f.title :  f.name.replace('.mp3', '').replace(/[^A-Za-z\s]/g, ''),
+                  name: f.name.replace('.mp3', '').replace(/[^A-Za-z\s]/g, ''),
+                  title: f.title,
                   length: f.length,
                   parent: 'https://archive.org/details/' + searchResults[index].identifier
               }));
@@ -58,8 +59,8 @@ export default function Home() {
         };
 
         // getData('https://archive.org/advancedsearch.php?q=mediatype%3A%28audio%29+78rpm+jazz&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=item_size&fl%5B%5D=mediatype&fl%5B%5D=name&fl%5B%5D=source&fl%5B%5D=title&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=5&page=1&output=json');
-        let searchterm = '';
-        let sorttype = '__random+asc';
+        let searchterm = 'thelonious';
+        let sorttype = '';//'__random+asc';
         let rows = 10;
         getData(
             `https://archive.org/advancedsearch.php?q=mediatype%3A%28audio%29+78rpm+${searchterm}&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=item_size&fl%5B%5D=mediatype&fl%5B%5D=name&fl%5B%5D=source&fl%5B%5D=title&sort%5B%5D=${sorttype}&sort%5B%5D=&sort%5B%5D=&rows=${rows}&page=1&output=json`
@@ -117,8 +118,6 @@ export default function Home() {
                 
                 {songlist.length && (
                     <>         
-                        <div onClick={handlePlayPause}>{playStatus}</div>
-                        <div onClick={handleNext}>skip...</div>
                         <audio
                             src={songlist[currentSong].url}
                             ref={(input) => {
@@ -130,9 +129,14 @@ export default function Home() {
                         ></audio>
                         <div className={styles.songList + ' ' + styles.songListActive }>
                             <p >
+                                {songlist[currentSong].name}
+                            </p>
+                            <p >
                                 {songlist[currentSong].title}
-                            </p>  
+                            </p>      
                         </div>
+                        <div onClick={handlePlayPause}>{playStatus}</div>
+                        <div onClick={handleNext}>skip</div>
                     </>
                 )}
           </main>
