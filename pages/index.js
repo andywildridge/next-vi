@@ -32,7 +32,9 @@ export default function Home() {
               .map((f) => ({
                   all: f,
                   url: baseUrl + f.name,
-                  name: f.name.replace('.mp3', '').replace(/[^A-Za-z\s]/g, ''),
+                  name: f.name.replace('.mp3', '')
+                        .replaceAll('_', ' ')
+                        .replace(/[^A-Za-z\s\-]/g, ''),
                   title: f.title,
                   length: f.length,
                   parent: 'https://archive.org/details/' + searchResults[index].identifier
@@ -59,8 +61,8 @@ export default function Home() {
         };
 
         // getData('https://archive.org/advancedsearch.php?q=mediatype%3A%28audio%29+78rpm+jazz&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=item_size&fl%5B%5D=mediatype&fl%5B%5D=name&fl%5B%5D=source&fl%5B%5D=title&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=5&page=1&output=json');
-        let searchterm = 'thelonious';
-        let sorttype = '';//'__random+asc';
+        let searchterm = 'tatum';
+        let sorttype = ''; // '__random+asc';
         let rows = 10;
         getData(
             `https://archive.org/advancedsearch.php?q=mediatype%3A%28audio%29+78rpm+${searchterm}&fl%5B%5D=description&fl%5B%5D=identifier&fl%5B%5D=item_size&fl%5B%5D=mediatype&fl%5B%5D=name&fl%5B%5D=source&fl%5B%5D=title&sort%5B%5D=${sorttype}&sort%5B%5D=&sort%5B%5D=&rows=${rows}&page=1&output=json`
